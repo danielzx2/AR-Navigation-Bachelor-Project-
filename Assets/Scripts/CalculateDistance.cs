@@ -9,8 +9,19 @@ public class CalculateDistance : MonoBehaviour
 
     public static CalculateDistance Instance { set; get; }
     public (float Latitude, float Longitude) start = (59.37796f, 18.04078f);
-    public (float Latitude, float Longitude) destination = (59.37665f, 18.03933f);
+    public (float Latitude, float Longitude) checkpoint1 = (59.37766f, 18.04098f);
+    public (float Latitude, float Longitude) checkpoint2 = (59.37736f,18.04143f);
+    public (float Latitude, float Longitude) checkpoint3 = (59.37723f,18.04086f);
+    public (float Latitude, float Longitude) checkpoint4 = (59.37728f,18.03949f);
+    public (float Latitude, float Longitude) checkpoint5 = (59.37695f, 18.039366f);
+    public (float Latitude, float Longitude) destination = (59.37666f, 18.03930f);
+
+    (float, float)[] listOfPOIs = new (float, float)[6];
+    
     public (float Latitude, float Longitude) current;
+    
+    public int POI;
+    public bool played;
     const float radius = 6378.16f; // The Radius of the Earth
     public float result;
     public float directionAngle;
@@ -18,8 +29,15 @@ public class CalculateDistance : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        distance(current, destination);
-        angle(current, destination);
+        listOfPOIs[0] = checkpoint1;
+        listOfPOIs[1] = checkpoint2;
+        listOfPOIs[2] = checkpoint3;
+        listOfPOIs[3] = checkpoint4;
+        listOfPOIs[4] = checkpoint5;
+        listOfPOIs[5] = destination;
+        POI = 0;
+        distance(current, listOfPOIs[0]);
+        angle(current, listOfPOIs[0]);
     }
 
     public void angle((float, float) current, (float, float) dest){
@@ -62,13 +80,22 @@ public class CalculateDistance : MonoBehaviour
 
     }
 
+    public void changePOI(){
+       if (played == true)
+       {
+           played = false;
+       } 
+       POI += 1;
+       POI = POI % listOfPOIs.Length;
+    }
+
     // Update is called once per frame
     void Update()
     {
         current.Latitude = GPS.Instance.latitude;
         current.Longitude = GPS.Instance.longitude;
-        distance(current, destination);
-        angle(current, destination);
-        Debug.Log("Distance " + result.ToString());
+        distance(current, listOfPOIs[POI]);
+        angle(current, listOfPOIs[POI]);
+        Debug.Log("POI: " + POI.ToString());
     }
 }

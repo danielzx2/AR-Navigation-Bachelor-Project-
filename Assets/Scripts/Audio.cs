@@ -7,44 +7,53 @@ public class Audio : MonoBehaviour
     public static Audio Instance {get; set;}
     public AudioSource source;
     public AudioClip clip;
+    public AudioClip straight;
     public AudioClip left;
     public AudioClip right;
     public AudioClip start;
     public AudioClip soon;
     public AudioClip goal;
 
-    public AudioClip state;
-
-    float  cooldown;
-
-    public bool played = false;
+    public bool played;
 
     void Start(){
+        played = false;
         playSound(start);
     }
 
-    void playSound(AudioClip status){
-        if(!source.isPlaying && played == false){
+    public void playSound(AudioClip status){
             source.PlayOneShot(status);
-            played = true;
-        }
-        played = false;
-        
     }
-    void Update()
-    {
-        cooldown += Time.deltaTime;
-        
-        if(cooldown > 15f){
-            if(UpdateDistance.Instance.result < 10f && UpdateDistance.Instance.result > 5f){
-                playSound(soon);
-            }
-            if(UpdateDistance.Instance.result > 0f && UpdateDistance.Instance.result < 5f){
-                playSound(goal);
-            }      
-            cooldown = 0;
+
+    void Update(){
+        if(CalculateDistance.Instance.POI == 1 && CalculateDistance.Instance.played == false){
+            playSound(straight);
+            CalculateDistance.Instance.played = true;
         }
-        Debug.Log(state.name.ToString());
-        Debug.Log(cooldown.ToString());
+
+       if (CalculateDistance.Instance.POI == 2 && CalculateDistance.Instance.played == false)
+       {
+           playSound(right);
+           CalculateDistance.Instance.played = true;
+       }
+
+       if (CalculateDistance.Instance.POI == 3 && CalculateDistance.Instance.played == false)
+       {
+           playSound(left);
+           CalculateDistance.Instance.played = true;
+       }
+
+       if (CalculateDistance.Instance.POI == 4 && CalculateDistance.Instance.played == false)
+       {
+           playSound(soon);
+           CalculateDistance.Instance.played = true;
+       }
+
+       if(CalculateDistance.Instance.POI == 5 && CalculateDistance.Instance.played == false)
+       {
+           playSound(goal);
+           CalculateDistance.Instance.played = true;
+       }
     }
+    
 }

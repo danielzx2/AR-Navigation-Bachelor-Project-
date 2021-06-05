@@ -16,6 +16,6 @@ public class UpdateDistance : MonoBehaviour
         {
             toDestination.text = "Goal Reached!";
         }
-        toDestination.text = "Distance: " +  result.ToString() + "m \n";
+        toDestination.text = "Distance: " +  result.ToString() + "m \n" + "POI: " + CalculateDistance.Instance.POI.ToString();
     }
 }
