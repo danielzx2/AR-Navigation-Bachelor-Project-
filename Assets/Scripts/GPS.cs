@@ -43,6 +43,8 @@ public class GPS : MonoBehaviour
         latitude = Input.location.lastData.latitude;
         longitude = Input.location.lastData.longitude;
 
+        digitalFilterGPS();
+
         yield break;
     }
 

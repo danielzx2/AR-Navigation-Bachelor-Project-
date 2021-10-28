@@ -27,7 +27,7 @@ public class UpdateGPSOutput : MonoBehaviour
         {
             zeroMinute = "";
         }
-        coordniates.text =  "Latitude: " + GPS.Instance.latitude.ToString() + "\n" +  "Longitude: " + GPS.Instance.longitude.ToString() + "\n" + "Checked at: " + System.DateTime.Now.Hour.ToString() + ":"  + zeroMinute + System.DateTime.Now.Minute.ToString() + ":" + zeroSeconds + System.DateTime.Now.Second.ToString();
+        coordniates.text =  "Latitude: " + GPS.Instance.latitude.ToString() + "\n" +  "Longitude: " + GPS.Instance.longitude.ToString() + "\n" + "Checked at: " + System.DateTime.Now.Hour.ToString() + ":"  + zeroMinute + System.DateTime.Now.Minute.ToString() + ":" + zeroSeconds + System.DateTime.Now.Second.ToString() + "\n" + "Gyroscope: " + GyroScopeScript.Instance.gyro.attitude.ToString();
     }
     
 }

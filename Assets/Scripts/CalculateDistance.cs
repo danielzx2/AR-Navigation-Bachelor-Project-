@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CalculateDistance : MonoBehaviour
 
@@ -84,9 +85,12 @@ public class CalculateDistance : MonoBehaviour
        if (played == true)
        {
            played = false;
-       } 
+       }
        POI += 1;
-       POI = POI % listOfPOIs.Length;
+       if (POI == 5)
+       {
+           SceneManager.LoadScene("DestinationInfo");
+       } 
     }
 
     // Update is called once per frame
@@ -96,6 +100,5 @@ public class CalculateDistance : MonoBehaviour
         current.Longitude = GPS.Instance.longitude;
         distance(current, listOfPOIs[POI]);
         angle(current, listOfPOIs[POI]);
-        Debug.Log("POI: " + POI.ToString());
     }
 }

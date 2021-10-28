@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GyroScopeScript : MonoBehaviour
 {
+    public static GyroScopeScript Instance {get; set;}
     private bool gyroEnabled;
-    private Gyroscope gyro;
+    public Gyroscope gyro;
+    public string gyroStats;
 
     private GameObject cameraContainer;
     private Quaternion rot;
@@ -15,6 +17,7 @@ public class GyroScopeScript : MonoBehaviour
         cameraContainer.transform.position = transform.position;
         transform.SetParent(cameraContainer.transform);
 
+        Instance = this;
         gyroEnabled = EnableGyro();
     }
 
@@ -35,6 +38,7 @@ public class GyroScopeScript : MonoBehaviour
     private void Update(){
         if(gyroEnabled){
             transform.localRotation = gyro.attitude * rot;
+            gyroStats = gyro.attitude.eulerAngles.ToString();
         }
     }
 

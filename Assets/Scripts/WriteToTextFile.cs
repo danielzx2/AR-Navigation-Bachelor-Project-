@@ -1,45 +1,25 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
 
+//DateTime.Now.ToString() + ":" + DateTime.Now.Millisecond.ToString()
 
 public class WriteToTextFile : MonoBehaviour
 {
-    string [] coords;
-    string filePath, fileName;
-    public Text status;
-    void Start(){
-        fileName = System.DateTime.Now.ToString();
-        filePath = Application.persistentDataPath + "/" + fileName;
-        status.text = "Write to File";
+    string filePath;
+    public DateTime startTime;
+    private void Start() {
+        InvokeRepeating("writeToFile", 0.98f, 1.0f);
+        startTime = DateTime.Now;
     }
-    void writeCoordinates(){
-        coords = new string[3];
-        coords[0] = "Latitude: " + CalculateDistance.Instance.current.Latitude.ToString() + " ";
-        coords[1] = "Longitude: " + CalculateDistance.Instance.current.Longitude.ToString() + " ";
-        coords[2] = "At: " +  System.DateTime.Now;
-        
-        for (int i = 0; i < coords.Length; i++)
-        {
-            coords[i] = "";
-        }
-    }
-
-    public void writeToFile(){
-        writeCoordinates();
-        File.WriteAllLines(filePath, coords);
-        if(File.Exists(filePath)){
-            status.text = "Write Complete!";
-        }
-        else
-        {
-            status.text = "Write Failed";
-        }
-    }
-
-    void Update(){
-        writeToFile();
+    void writeToFile(){
+        filePath = Application.persistentDataPath+ "/" + "data.txt";
+        StreamWriter writer = new StreamWriter(filePath, true);
+        TimeSpan currentTime = System.DateTime.Now - startTime;
+        writer.WriteLine(currentTime.Minutes.ToString() + ":" + currentTime.Seconds.ToString() + ";" + GPS.Instance.latitude.ToString() + ";" + GPS.Instance.longitude.ToString() + ";" + GyroScopeScript.Instance.gyro.attitude.ToString());
+        writer.Close();
     }
 }
