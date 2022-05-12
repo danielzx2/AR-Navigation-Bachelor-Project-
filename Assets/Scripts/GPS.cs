@@ -43,11 +43,11 @@ public class GPS : MonoBehaviour
         latitude = Input.location.lastData.latitude;
         longitude = Input.location.lastData.longitude;
 
-        digitalFilterGPS();
 
         yield break;
     }
 
+    /*
     private void digitalFilterGPS(){
         int counter = 0;
         int maxcount = 0;
@@ -65,6 +65,7 @@ public class GPS : MonoBehaviour
             longitude = filteredLongitude;
         }
     }
+    */
 
     void Update(){
         latitude = Input.location.lastData.latitude;
