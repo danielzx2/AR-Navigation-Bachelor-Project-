@@ -9,13 +9,14 @@ public class CalculateDistance : MonoBehaviour
 {
 
     public static CalculateDistance Instance { set; get; }
-    public (float Latitude, float Longitude) start = (59.37796f, 18.04078f);
-    public (float Latitude, float Longitude) checkpoint1 = (59.37766f, 18.04098f);
-    public (float Latitude, float Longitude) checkpoint2 = (59.37736f,18.04143f);
-    public (float Latitude, float Longitude) checkpoint3 = (59.37723f,18.04086f);
-    public (float Latitude, float Longitude) checkpoint4 = (59.37728f,18.03949f);
-    public (float Latitude, float Longitude) checkpoint5 = (59.37695f, 18.039366f);
-    public (float Latitude, float Longitude) destination = (59.37666f, 18.03930f);
+    // Insert a set of coordinates in the format of (Latitude, Longitude) into the tuples below. Coordinates can be taken from Google Maps.
+    public (float Latitude, float Longitude) start = (0f, 0f);
+    public (float Latitude, float Longitude) checkpoint1 = (0f, 0f);
+    public (float Latitude, float Longitude) checkpoint2 = (0f, 0f);
+    public (float Latitude, float Longitude) checkpoint3 = (0f, 0f);
+    public (float Latitude, float Longitude) checkpoint4 = (0f, 0f);
+    public (float Latitude, float Longitude) checkpoint5 = (0f, 0f);
+    public (float Latitude, float Longitude) destination = (0f, 0f);
 
     (float, float)[] listOfPOIs = new (float, float)[6];
     
